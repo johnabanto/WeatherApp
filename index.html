@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Origin Weather Application</title>
+<!-- bower:css -->
+<link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+<!-- endbower -->
+
+<!-- inject:css -->
+<link rel="stylesheet" href="/app/styles/styles.css">
+<!-- endinject -->
+</head>
+
+<body ng-controller="WeatherController as vm">
+	<!-- heading title box -->
+	<div class="container-fluid">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h1>Origin Weather Application</h1>
+				<p>Always know if you'll need an umbrella!</p>
+			</div>
+		</div>
+
+		<!-- button row for cities -->
+		<div class="btn-row">
+			<button ng-click="vm.getInfo('San Diego')"  type="submit" class="btn btn-primary pull-left">San Diego</button>
+			<button ng-click="vm.getInfo('New York')" type="submit"  class="btn btn-primary pull-left">New York</button>
+			<button ng-click="vm.getInfo('Seattle')" type="submit" class="btn btn-primary pull-left">Seattle</button>
+			<button ng-click="vm.getInfo('London')" type="submit" class="btn btn-primary pull-left">London</button>
+			<button ng-click="vm.getInfo('Tokyo')" type="submit" class="btn btn-primary pull-left">Tokyo</button>
+		</div>
+	</div>
+
+	<!-- city search bar with go button -->
+	<div class="panel-body">
+		<div class="input-group">
+			<input ng-model="vm.cityname" class="form-control" type="text" placeholder="Search a different city">
+				<span class="input-group-btn">
+					<button ng-click="vm.getInfo(vm.cityname)" class="btn btn-secondary" type="button">Go!</button>
+				</span>
+		</div>
+	</div>
+
+	<!-- city information panel -->
+	<div class="container-fuild">
+		<div class="col-xs-6">
+			<div class="panel panel-info">
+				<div class="panel-heading">City Information</div>
+					<div class="panel-body">
+						<label>City</label>
+							<p>{{vm.cityData.name}}</p>
+						<label>Lat/Long</label>
+							<p>{{vm.coord.lat}}{{vm.cityData.coord.lon}}</p>
+						<label>Temperature(&#8457;)</label>
+							<p>{{vm.cityData.main.temp}}</p>
+						<label>Lowest Temp(&#8457;)</label>
+							<p>{{vm.cityData.main.temp_min}}</p>
+						<label>Highest Temp(&#8457;)</label>
+							<p>{{vm.cityData.main.temp_max}}</p>
+						<label>Pressure</label>
+							<p>{{vm.cityData.main.pressure}}</p>
+						<label>Humidity</label>
+							<p>{{vm.cityData.main.humidity}}</p>
+						<label>Wind Speed</label>
+							<p>{{vm.cityData.wind.speed}}</p>
+					</div>
+			</div>
+		</div>
+
+		<!-- search history panel -->
+		<div class="col-xs-6">
+			<div class="panel panel-info">
+				<div class="panel-heading">Search History</div>
+					<div class="panel-body">
+						<table>
+							<tr ng-repeat="info in vm.history">
+								<td>{{info.place}}</td>
+								<td class="text-right">{{info.dt | date:'MM/dd/yyyy HH:mm:ss'}}</td> <!-- convert UNIX number to time and date -->
+							</tr>
+						</table>
+					</div>
+			</div>
+		</div>
+	</div>
+
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<!-- endbower -->
+
+<!-- inject:js -->
+<script src="/app/index.js"></script>
+<script src="/app/weatherController.js"></script>
+<script src="/app/weatherFactory.js"></script>
+<!-- endinject -->	
+</body>
+</html>
