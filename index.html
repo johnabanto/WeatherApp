@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
 <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+<link rel="stylesheet" href="bower_components/toastr/toastr.css" />
 <!-- endbower -->
 
 <!-- inject:css -->
@@ -14,7 +15,7 @@
 <!-- endinject -->
 </head>
 
-<body ng-controller="WeatherController as vm">
+<body ng-controller="WeatherController as vm" ng-cloak> 
 	<!-- heading title box -->
 	<div class="container-fluid">
 		<div class="panel panel-default">
@@ -26,8 +27,8 @@
 
 		<!-- button row for cities -->
 		<div class="btn-row">
-			<button ng-click="vm.getInfo('San Diego')"  type="submit" class="btn btn-primary pull-left">San Diego</button>
-			<button ng-click="vm.getInfo('New York')" type="submit"  class="btn btn-primary pull-left">New York</button>
+			<button ng-click="vm.getInfo('San Diego')" type="submit" class="btn btn-primary pull-left">San Diego</button>
+			<button ng-click="vm.getInfo('New York')" type="submit" class="btn btn-primary pull-left">New York</button>
 			<button ng-click="vm.getInfo('Seattle')" type="submit" class="btn btn-primary pull-left">Seattle</button>
 			<button ng-click="vm.getInfo('London')" type="submit" class="btn btn-primary pull-left">London</button>
 			<button ng-click="vm.getInfo('Tokyo')" type="submit" class="btn btn-primary pull-left">Tokyo</button>
@@ -46,36 +47,56 @@
 
 	<!-- city information panel -->
 	<div class="container-fuild">
-		<div class="col-xs-6">
+		<div class="col-xs-8">
 			<div class="panel panel-info">
 				<div class="panel-heading">City Information</div>
 					<div class="panel-body">
-						<label>City</label>
-							<p>{{vm.cityData.name}}</p>
-						<label>Lat/Long</label>
-							<p>{{vm.coord.lat}}{{vm.cityData.coord.lon}}</p>
-						<label>Temperature(&#8457;)</label>
-							<p>{{vm.cityData.main.temp}}</p>
-						<label>Lowest Temp(&#8457;)</label>
-							<p>{{vm.cityData.main.temp_min}}</p>
-						<label>Highest Temp(&#8457;)</label>
-							<p>{{vm.cityData.main.temp_max}}</p>
-						<label>Pressure</label>
-							<p>{{vm.cityData.main.pressure}}</p>
-						<label>Humidity</label>
-							<p>{{vm.cityData.main.humidity}}</p>
-						<label>Wind Speed</label>
-							<p>{{vm.cityData.wind.speed}}</p>
+						<!-- info panel rows for data -->
+						<!-- first row of data -->
+						<div class="row">
+							<div align="center">
+								<h1>City</h1>
+								<p>{{vm.cityData.name}}</p>
+								<p>{{vm.cityData.coord.lat}},{{vm.cityData.coord.lon}}</p>
+							</div>
+							<div class="col-xs-4 form-group">
+								<h4>Temperature(&#8457;)</h4>
+								<p>{{vm.cityData.main.temp}}</p>
+							</div>
+							<div class="col-xs-4 form-group">
+								<h4>Lowest Temp(&#8457;)</h4>
+								<p>{{vm.cityData.main.temp_min}}</p>
+							</div>
+							<div class="col-xs-4 form-group">
+								<h4>Highest Temp(&#8457;)</h4>
+								<p>{{vm.cityData.main.temp_max}}</p>
+							</div>
+						</div>
+						<!-- second row of data -->
+						<div class="row">
+							<div class="col-xs-4 form-group">
+								<h4>Pressure</h4>
+								<p>{{vm.cityData.main.pressure}}</p>
+							</div>
+							<div class="col-xs-4 form-group">
+								<h4>Humidity</h4>
+								<p>{{vm.cityData.main.humidity}}</p>
+							</div>
+							<div class="col-xs-4 form-group">
+								<h4>Wind Speed</h4>
+								<p>{{vm.cityData.wind.speed}}</p>
+							</div>
+						</div>
 					</div>
+				</div>
 			</div>
-		</div>
 
 		<!-- search history panel -->
-		<div class="col-xs-6">
+		<div class="col-xs-4">
 			<div class="panel panel-info">
 				<div class="panel-heading">Search History</div>
 					<div class="panel-body">
-						<table>
+						<table class="table table-striped">
 							<tr ng-repeat="info in vm.history">
 								<td>{{info.place}}</td>
 								<td class="text-right">{{info.dt | date:'MM/dd/yyyy HH:mm:ss'}}</td> <!-- convert UNIX number to time and date -->
@@ -86,10 +107,12 @@
 		</div>
 	</div>
 
+
 <!-- bower:js -->
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="bower_components/toastr/toastr.js"></script>
 <!-- endbower -->
 
 <!-- inject:js -->

@@ -1,0 +1,11 @@
+ng-cloak {
+	display: none;
+}
+
+p {
+	color: green;
+}
+
+h1, {
+	font-weight: bold;
+}
